@@ -3,36 +3,12 @@ import run from "aocrunner"
 const parseInput = (rawInput) => rawInput
 const getRows = (rawInput) => rawInput.split("\n")
 
-function findNumberWords(text) {
-  const numberWords = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-  let matches = [];
-  let remainingText = text;
-
-  numberWords.forEach(word => {
-    const wordRegex = new RegExp(word, "gi");
-    let match;
-
-    while ((match = wordRegex.exec(remainingText)) !== null) {
-      matches.push(match[0]);
-      // Update the remaining text, removing the matched part
-      let matchIndex = remainingText.indexOf(match[0]);
-      remainingText = remainingText.slice(0, matchIndex) + remainingText.slice(matchIndex + match[0].length);
-      // Reset the lastIndex of the regex to start from the beginning of the updated remaining text
-      wordRegex.lastIndex = 0;
-    }
-  });
-
-  return matches;
-}
-
 const part1 = (rawInput) => {
   const input = parseInput(rawInput)
   let result = 0
   for (const row of getRows(input)) {
     const numbers = []
-    // get first and last number in the string
     const matches = row.match(/(\d)/g)
-    // only push first and last and if there's none push 0 if there's one push it twice
     if (matches.length === 0) {
       numbers.push(0)
     } else {
@@ -61,17 +37,26 @@ const part2 = (rawInput) => {
   const input = parseInput(rawInput)
   let result = []
   for (const row of getRows(input)) {
-    const matches = findNumberWords(row)
-    const firstAndLastMatches = [matches[0], matches[matches.length - 1]]
-    const translated = firstAndLastMatches.map(c => {
-      let num = parseInt(c)
-      if (isNaN(num)) {
-        return `${numbersTranslation[c]}`
+    const rowNumbers = []
+    for (let i = 0; i < row.length; i++) {
+      const char = row[i]
+      if (char === " ") {
+        continue
       }
-      return `${num}`
-    })
-    const res = parseInt(`${translated.join('')}`)
-    result.push(res)
+      if (char.match(/\d/)) {
+        rowNumbers.push(char)
+      } else if (i + 2 < row.length) {
+        const rowSplit = row.slice(i)
+        for (const wordNum of Object.keys(numbersTranslation)) {
+          if (rowSplit.startsWith(wordNum)) {
+            rowNumbers.push(numbersTranslation[wordNum].toString())
+            i += wordNum.length - 2
+            break
+          }
+        }
+      }
+    }
+    result.push(parseInt(rowNumbers.join("")))
   }
   return result.reduce((acc, curr) => acc + curr, 0)
 }
@@ -99,5 +84,5 @@ treb7uchet`,
     solution: part2,
   },
   trimTestInputs: true,
-  onlyTests: true,
+  onlyTests: false,
 })
