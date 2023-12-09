@@ -10,40 +10,33 @@ const findDifferences = (arr) => {
   return differences
 }
 
-const part1 = (rawInput) => {
-  const histories = parseInput(rawInput)
+function getExtrapolationResults(histories) {
   const results = []
   for (const history of histories) {
     const extrapolations = [history]
     while (!extrapolations[extrapolations.length - 1].every(c => c === 0)) {
-        extrapolations.push(findDifferences(extrapolations[extrapolations.length - 1]))
+      extrapolations.push(findDifferences(extrapolations[extrapolations.length - 1]))
     }
-    for (let i=extrapolations.length-1; i>0; i--) {
+    for (let i = extrapolations.length - 1; i > 0; i--) {
       const lastExt = extrapolations[i]
-      const nextExt = extrapolations[i-1]
-      nextExt.push(nextExt[nextExt.length-1] + lastExt[lastExt.length-1])
+      const nextExt = extrapolations[i - 1]
+      nextExt.push(nextExt[nextExt.length - 1] + lastExt[lastExt.length - 1])
     }
-    results.push(extrapolations[0][extrapolations[0].length-1])
+    results.push(extrapolations[0][extrapolations[0].length - 1])
   }
+  return results
+}
+
+const part1 = (rawInput) => {
+  const histories = parseInput(rawInput)
+  const results = getExtrapolationResults(histories);
 
   return results.reduce((acc, cur) => acc + cur, 0)
 }
 
 const part2 = (rawInput) => {
   const histories = parseInput(rawInput)
-  const results = []
-  for (const history of histories) {
-    const extrapolations = [history.reverse()]
-    while (!extrapolations[extrapolations.length - 1].every(c => c === 0)) {
-      extrapolations.push(findDifferences(extrapolations[extrapolations.length - 1]))
-    }
-    for (let i=extrapolations.length-1; i>0; i--) {
-      const lastExt = extrapolations[i]
-      const nextExt = extrapolations[i-1]
-      nextExt.push(nextExt[nextExt.length-1] + lastExt[lastExt.length-1])
-    }
-    results.push(extrapolations[0][extrapolations[0].length-1])
-  }
+  const results = getExtrapolationResults(histories.map(h=>h.reverse()));
 
   return results.reduce((acc, cur) => acc + cur, 0)
 }
