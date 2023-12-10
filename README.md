@@ -133,9 +133,9 @@ Both parts: 2.575ms
 
 ```
 Day 10
-Time part 1: 39.646ms
+Time part 1: 41.466ms
 Time part 2: -
-Both parts: 39.646ms
+Both parts: 41.466ms
 ```
 
 ```
@@ -245,7 +245,7 @@ Both parts: -
 
 ```
 Total stars: 19/50
-Total time: 75283.781ms
+Total time: 75285.6ms
 ```
 
 <!--/RESULTS-->
