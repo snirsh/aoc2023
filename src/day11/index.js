@@ -7,6 +7,12 @@ const parseInput = (rawInput) => {
 
   const input = rawInput.split("\n").map(row => row.split(""));
 
+  for (let j = 0; j < input[0].length; j++) {
+    if (!input.map((e) => e[j]).includes("#")) {
+      cols.push(j);
+    }
+  }
+
   for (let i = 0; i < input.length; i++) {
     if (!input[i].includes("#")) {
       rows.push(i);
@@ -18,36 +24,33 @@ const parseInput = (rawInput) => {
     }
   }
 
-  for (let j = 0; j < input[0].length; j++) {
-    if (!input.map((e) => e[j]).includes("#")) {
-      cols.push(j);
-    }
-  }
-
   return { rows, cols, galaxies };
 };
 
 const process = (galaxies, rows, cols, expand) => {
-  const dist = [];
+  galaxies.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
 
-  for (let i = 0; i < galaxies.length; i++) {
-    dist[i] = [];
-    for (let j = i; j < galaxies.length; j++) {
-      const minCol = Math.min(galaxies[i][1], galaxies[j][1]);
-      const maxCol = Math.max(galaxies[i][1], galaxies[j][1]);
-      const minRow = Math.min(galaxies[i][0], galaxies[j][0]);
-      const maxRow = Math.max(galaxies[i][0], galaxies[j][0]);
+  let totalDistance = 0;
+  let activeGalaxies = new Set();
 
-      const colCount = cols.map((col) => col > minCol && col < maxCol).filter(Boolean).length;
-      const rowCount = rows.map((row) => row > minRow && row < maxRow).filter(Boolean).length;
+  galaxies.forEach(galaxy => {
+    activeGalaxies.forEach(otherGalaxy => {
+      const minCol = Math.min(galaxy[1], otherGalaxy[1]);
+      const maxCol = Math.max(galaxy[1], otherGalaxy[1]);
+      const minRow = Math.min(galaxy[0], otherGalaxy[0]);
+      const maxRow = Math.max(galaxy[0], otherGalaxy[0]);
 
-      dist[i][j] = Math.abs(galaxies[i][0] - galaxies[j][0]) +
-        Math.abs(galaxies[i][1] - galaxies[j][1]) +
+      const colCount = cols.filter(col => col > minCol && col < maxCol).length;
+      const rowCount = rows.filter(row => row > minRow && row < maxRow).length;
+      // totalDistance = |x1 - x2| + |y1 - y2| + (expand - 1) * (colCount + rowCount)
+      totalDistance += Math.abs(galaxy[0] - otherGalaxy[0]) +
+        Math.abs(galaxy[1] - otherGalaxy[1]) +
         (expand - 1) * (colCount + rowCount);
-    }
-  }
+    });
+    activeGalaxies.add(galaxy);
+  });
 
-  return dist.flat().reduce((acc, cur) => acc + cur, 0);
+  return totalDistance;
 };
 
 const part1 = (rawInput) => {
