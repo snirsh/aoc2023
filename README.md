@@ -140,9 +140,9 @@ Both parts: 41.118ms
 
 ```
 Day 11
-Time part 1: 53.833ms
-Time part 2: 39.162ms
-Both parts: 92.995ms
+Time part 1: 11.025ms
+Time part 2: 14.977ms
+Both parts: 26.003ms
 ```
 
 ```
@@ -245,7 +245,7 @@ Both parts: -
 
 ```
 Total stars: 21/50
-Total time: 75378.247ms
+Total time: 75311.255ms
 ```
 
 <!--/RESULTS-->
