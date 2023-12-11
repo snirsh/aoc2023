@@ -157,7 +157,7 @@
         "time": 41.226958
       },
       "part2": {
-        "solved": false,
+        "solved": true,
         "result": "363",
         "attempts": [
           "437"
