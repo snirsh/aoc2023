@@ -28,46 +28,33 @@ const parseInput = (rawInput) => {
 };
 
 const process = (galaxies, rows, cols, expand) => {
-  expand -= 1;
   const dist = [];
 
   for (let i = 0; i < galaxies.length; i++) {
     dist[i] = [];
     for (let j = i; j < galaxies.length; j++) {
-      let colCount = 0;
-      let rowCount = 0;
+      const minCol = Math.min(galaxies[i][1], galaxies[j][1]);
+      const maxCol = Math.max(galaxies[i][1], galaxies[j][1]);
+      const minRow = Math.min(galaxies[i][0], galaxies[j][0]);
+      const maxRow = Math.max(galaxies[i][0], galaxies[j][0]);
 
-      for (let col of cols) {
-        if (col > Math.min(galaxies[i][1], galaxies[j][1]) && col < Math.max(galaxies[i][1], galaxies[j][1])) {
-          colCount++;
-        }
-      }
-
-      for (let row of rows) {
-        if (row > Math.min(galaxies[i][0], galaxies[j][0]) && row < Math.max(galaxies[i][0], galaxies[j][0])) {
-          rowCount++;
-        }
-      }
+      const colCount = cols.map((col) => col > minCol && col < maxCol).filter(Boolean).length;
+      const rowCount = rows.map((row) => row > minRow && row < maxRow).filter(Boolean).length;
 
       dist[i][j] = Math.abs(galaxies[i][0] - galaxies[j][0]) +
         Math.abs(galaxies[i][1] - galaxies[j][1]) +
-        expand * colCount +
-        expand * rowCount;
+        (expand - 1) * (colCount + rowCount);
     }
   }
 
-  return dist
-    .map((e) => e.reduce((acc, cur) => acc + cur, 0))
-    .reduce((acc, cur) => acc + cur, 0);
+  return dist.flat().reduce((acc, cur) => acc + cur, 0);
 };
 
-// Part 1 solution function
 const part1 = (rawInput) => {
   const { rows, cols, galaxies } = parseInput(rawInput);
   return process(galaxies, rows, cols, 2);
 };
 
-// Part 2 solution function
 const part2 = (rawInput) => {
   const { rows, cols, galaxies } = parseInput(rawInput);
   return process(galaxies, rows, cols, 1000000);
