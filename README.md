@@ -23,7 +23,7 @@ Well, fast but sometimes dirty solutions for [Advent of Code 2023](https://adven
 [![Day](https://badgen.net/badge/09/%E2%98%85%E2%98%85/green)](src/day09)
 [![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%85/green)](src/day10)
 [![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](src/day11)
-![Day](https://badgen.net/badge/12/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%85/green)](src/day12)
 ![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/15/%E2%98%86%E2%98%86/gray)
@@ -84,9 +84,9 @@ Both parts: 2.731ms
 
 ```
 Day 03
-Time part 1: -
-Time part 2: 16.535ms
-Both parts: 16.535ms
+Time part 1: 23.799ms
+Time part 2: 14.687ms
+Both parts: 38.486ms
 ```
 
 ```
@@ -147,9 +147,9 @@ Both parts: 26.003ms
 
 ```
 Day 12
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 12.093ms
+Time part 2: 131.78ms
+Both parts: 143.873ms
 ```
 
 ```
@@ -244,8 +244,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 22/50
-Total time: 75346.313ms
+Total stars: 24/50
+Total time: 75512.138ms
 ```
 
 <!--/RESULTS-->
