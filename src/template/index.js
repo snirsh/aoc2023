@@ -3,13 +3,13 @@ import run from "aocrunner"
 const parseInput = (rawInput) => rawInput.split("\n")
 
 const part1 = (rawInput) => {
-  const rows = parseInput(rawInput)
+  const input = parseInput(rawInput)
 
   return
 }
 
 const part2 = (rawInput) => {
-  const rows = parseInput(rawInput)
+  const input = parseInput(rawInput)
 
   return
 }
@@ -34,5 +34,5 @@ run({
     solution: part2,
   },
   trimTestInputs: true,
-  onlyTests: false,
+  onlyTests: true,
 })

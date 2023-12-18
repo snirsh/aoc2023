@@ -1,5 +1,4 @@
 import run from "aocrunner"
-import { Dir } from "fs"
 
 // turn "R 2 (#59c680)" -> (R, 2, #59c680)
 const rowRegex = /([RLUD])\s(\d+)\s\((#[0-9a-f]{6})\)/
@@ -24,17 +23,6 @@ const numberToDirection = (n) => {
     case 2: return "L"
     case 3: return "U"
   }
-}
-
-const findArea = (polygon) => {
-  let area = 0
-  for (let i = 0; i < polygon.length; i++) {
-    const p1 = polygon[i]
-    const p2 = polygon[(i + 1) % polygon.length]
-    const d = det(p1, p2)
-    area += (0.5 * d)
-  }
-  return Math.abs(area)
 }
 
 function getDistAndDirFromColor(color) {
