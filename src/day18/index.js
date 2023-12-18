@@ -1,6 +1,5 @@
 import run from "aocrunner"
 
-// turn "R 2 (#59c680)" -> (R, 2, #59c680)
 const rowRegex = /([RLUD])\s(\d+)\s\((#[0-9a-f]{6})\)/
 
 const parseInput = (rawInput) => rawInput.split("\n").map(l => l.match(rowRegex)).map(([, direction, distance, color]) => ({ direction, distance, color }))
