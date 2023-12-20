@@ -203,9 +203,9 @@ Both parts: 40.788ms
 
 ```
 Day 20
-Time part 1: 10.733ms
-Time part 2: 20.925ms
-Both parts: 31.658ms
+Time part 1: 11.721ms
+Time part 2: 23.425ms
+Both parts: 35.146ms
 ```
 
 ```
@@ -245,7 +245,7 @@ Both parts: -
 
 ```
 Total stars: 40/50
-Total time: 79267.684ms
+Total time: 79271.172ms
 ```
 
 <!--/RESULTS-->
