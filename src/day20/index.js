@@ -89,8 +89,6 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput)
   initialize(input)
-  const bqInputs = Object.values(input).filter(m => m.d.includes('bq')).map(m => m.s)
-
   while (Object.values(listeners).some(v => v  === 0)) {
     buttonPresses++
     sendPulse(input)
